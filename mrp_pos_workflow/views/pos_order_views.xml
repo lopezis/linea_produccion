@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="production_display_action" model="ir.actions.client">
+        <field name="name">Dashboard de Producción</field>
+        <field name="tag">mrp_pos_workflow.production_display_action</field>
+        <field name="target">fullscreen</field>
+    </record>
+
+    <menuitem id="menu_production_line_root"
+              name="Línea de Producción"
+              groups="mrp_pos_workflow.group_production_operator"
+              sequence="30"/>
+
+    <menuitem id="menu_production_display"
+              name="Dashboard de Producción"
+              parent="menu_production_line_root"
+              action="production_display_action"
+              groups="mrp_pos_workflow.group_production_operator"/>
+
+    <record id="view_pos_order_production_tree" model="ir.ui.view">
+        <field name="name">pos.order.production.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="production_stage" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_pos_order_production_form" model="ir.ui.view">
+        <field name="name">pos.order.production.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="production_stage" widget="badge"/>
+                <button name="action_next_stage" type="object"
+                        string="Siguiente Etapa" class="btn-primary"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Producción" name="production">
+                    <group>
+                        <field name="production_stage" widget="badge"/>
+                        <field name="sewing_line_ids">
+                            <list editable="bottom">
+                                <field name="operator_id"/>
+                                <field name="quantity"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,9 @@
+.control-buttons .set-partner {
+    min-width: 120px;
+    max-width: 240px;
+}
+
+.o_delivery_date_button {
+    white-space: nowrap;
+    flex-shrink: 0;
+}

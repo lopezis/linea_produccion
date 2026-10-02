@@ -1,0 +1,25 @@
+.o_assign_dialog_content .o_assign_dialog {
+    padding: 4px;
+}
+
+.o_assign_dialog_ref {
+    font-size: 0.95rem;
+    color: #495057;
+}
+
+.o_assign_line_label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 4px;
+}
+
+.o_assign_operator {
+    flex: 1;
+    min-width: 0;
+}
+
+.o_assign_qty {
+    width: 110px;
+    flex-shrink: 0;
+}

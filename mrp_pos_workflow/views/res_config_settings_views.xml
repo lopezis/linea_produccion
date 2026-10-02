@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_sewing_operator"
+            model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.mrp_pos_workflow</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id"
+               ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='pos_payment_section']" position="after">
+                <block title="Costureros / Operadores de Costura"
+                       id="pos_sewing_operators_section">
+                    <setting id="sewing_operators"
+                             string="Operadores de Costura"
+                             help="Costureros disponibles para asignar en la fase de Logística de este punto de venta.">
+                        <field name="pos_sewing_operator_ids"
+                               colspan="4"
+                               widget="many2many_tags"
+                               options="{'no_create': True}"/>
+                        <div>
+                            <button name="%(mrp_pos_workflow.pos_sewing_operator_action)d"
+                                    icon="oi-arrow-right"
+                                    type="action"
+                                    string="Operadores de Costura"
+                                    class="btn-link"/>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

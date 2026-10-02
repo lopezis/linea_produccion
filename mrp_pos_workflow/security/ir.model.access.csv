@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_order_production_operator,pos.order.production.operator,point_of_sale.model_pos_order,mrp_pos_workflow.group_production_operator,1,1,0,0
+access_pos_order_sewing_line_operator,pos.order.sewing.line.operator,model_pos_order_sewing_line,mrp_pos_workflow.group_production_operator,1,1,1,1
+access_pos_order_sewing_line_pos_user,pos.order.sewing.line.pos_user,model_pos_order_sewing_line,point_of_sale.group_pos_user,1,1,1,1
+access_pos_sewing_operator_pos_user,pos.sewing.operator.pos_user,model_pos_sewing_operator,point_of_sale.group_pos_user,1,0,0,0
+access_pos_sewing_operator_pos_manager,pos.sewing.operator.pos_manager,model_pos_sewing_operator,point_of_sale.group_pos_manager,1,1,1,1
