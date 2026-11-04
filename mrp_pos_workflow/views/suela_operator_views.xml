@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_pos_suela_operator_tree" model="ir.ui.view">
+        <field name="name">pos.suela.operator.tree</field>
+        <field name="model">pos.suela.operator</field>
+        <field name="arch" type="xml">
+            <list string="Operadores de Suela" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_pos_suela_operator_form" model="ir.ui.view">
+        <field name="name">pos.suela.operator.form</field>
+        <field name="model">pos.suela.operator</field>
+        <field name="arch" type="xml">
+            <form string="Operador de Suela">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del suelero/a"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pos_suela_operator_search" model="ir.ui.view">
+        <field name="name">pos.suela.operator.search</field>
+        <field name="model">pos.suela.operator</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="filter_active" string="Activos"
+                        domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Inactivos"
+                        domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="pos_suela_operator_action" model="ir.actions.act_window">
+        <field name="name">Operadores de Suela</field>
+        <field name="res_model">pos.suela.operator</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_pos_suela_operator_tree"/>
+        <field name="search_view_id" ref="view_pos_suela_operator_search"/>
+    </record>
+
+    <menuitem id="menu_pos_suela_operator"
+              name="Operadores de Suela"
+              parent="point_of_sale.menu_point_config_product"
+              action="pos_suela_operator_action"
+              sequence="5"
+              groups="point_of_sale.group_pos_manager"/>
+
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="mrp_pos_workflow.assign_dialog">
+        <Dialog title="'Asignar Costurera/o'"
+                size="'md'"
+                contentClass="'o_assign_dialog_content'">
+            <div class="o_assign_dialog">
+                <div class="o_assign_dialog_ref mb-3">
+                    <strong>Orden:</strong> <span t-esc="props.orderName || props.orderId"/>
+                </div>
+
+                <t t-if="state.loading">
+                    <div class="text-muted py-4 text-center">Cargando...</div>
+                </t>
+                <t t-else="">
+                    <!-- Línea 1 (obligatoria) -->
+                    <div class="o_assign_line mb-3">
+                        <div class="o_assign_line_label">Costurera/o 1 <span class="text-danger">*</span></div>
+                        <div class="d-flex gap-2">
+                            <select class="form-select o_assign_operator"
+                                    t-att-value="state.line1.operator_id or ''"
+                                    t-on-change="(ev) => this.onOperatorChange(0, ev)">
+                                <option value="">Seleccione costurera/o...</option>
+                                <t t-foreach="state.operators" t-as="operator" t-key="operator.id">
+                                    <option t-att-value="operator.id"
+                                            t-att-selected="state.line1.operator_id === operator.id">
+                                        <t t-esc="operator.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                            <input type="number" min="0" step="1"
+                                   class="form-control o_assign_qty"
+                                   placeholder="Cantidad"
+                                   t-model="state.line1.quantity"/>
+                        </div>
+                    </div>
+
+                    <!-- Línea 2 (opcional) -->
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox"
+                               id="assign_second_line" t-model="state.hasSecondLine"/>
+                        <label class="form-check-label" for="assign_second_line">
+                            Agregar segunda costurera/o
+                        </label>
+                    </div>
+                    <div class="o_assign_line mb-3" t-if="state.hasSecondLine">
+                        <div class="o_assign_line_label">Costurera/o 2</div>
+                        <div class="d-flex gap-2">
+                            <select class="form-select o_assign_operator"
+                                    t-att-value="state.line2.operator_id or ''"
+                                    t-on-change="(ev) => this.onOperatorChange(1, ev)">
+                                <option value="">Seleccione costurera/o...</option>
+                                <t t-foreach="state.operators" t-as="operator" t-key="operator.id">
+                                    <option t-att-value="operator.id"
+                                            t-att-selected="state.line2.operator_id === operator.id">
+                                        <t t-esc="operator.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                            <input type="number" min="0" step="1"
+                                   class="form-control o_assign_qty"
+                                   placeholder="Cantidad"
+                                   t-model="state.line2.quantity"/>
+                        </div>
+                    </div>
+
+                </t>
+            </div>
+
+            <t t-set-slot="footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        t-on-click="() => props.close()">Cancelar</button>
+                <button type="button"
+                        class="btn btn-primary"
+                        t-att-disabled="!canSave"
+                        t-on-click="() => this.save()">
+                    Guardar
+                </button>
+            </t>
+        </Dialog>
+    </t>
+</templates>
