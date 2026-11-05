@@ -13,24 +13,6 @@ class PosOrder(models.Model):
 
     delivery_date = fields.Datetime(string="Fecha de Entrega")
 
-    def open_order_form(self):
-        self.ensure_one()
-        return {
-            "type": "ir.actions.act_window",
-            "res_model": "pos.order",
-            "view_mode": "form",
-            "res_id": self.id,
-            "views": [
-                (
-                    self.env.ref(
-                        "pos_maquiladora.view_pos_order_consolidation_form"
-                    ).id,
-                    "form",
-                )
-            ],
-            "target": "current",
-        }
-
     def action_send_to_production(self):
         orders = self.filtered(lambda order: order.production_stage == "draft")
         for order in self:

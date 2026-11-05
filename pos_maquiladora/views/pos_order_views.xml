@@ -6,7 +6,6 @@
         <field name="model">pos.order</field>
         <field name="arch" type="xml">
     <list string="Aprobaciones de Pedido" create="false"
-          editable="bottom"
           default_group_by="delivery_date:day"
           decoration-danger="production_stage == 'draft'"
           decoration-success="production_stage != 'draft'">
@@ -16,16 +15,13 @@
                     class="btn-primary"
                     icon="fa-industry"/>
         </header>
-        <field name="name" readonly="1"/>
-        <button name="open_order_form" type="object"
-                string="Ver detalle" class="btn-link"
-                icon="fa-external-link"/>
+        <field name="name"/>
         <field name="delivery_date"/>
-        <field name="partner_id" readonly="1"/>
+        <field name="partner_id"/>
         <field name="amount_total" string="Total" widget="monetary"
-               optional="show" readonly="1"/>
-        <field name="production_stage" widget="badge" readonly="1"/>
-        <field name="state" widget="badge" optional="hide" readonly="1"/>
+               optional="show"/>
+        <field name="production_stage" widget="badge"/>
+        <field name="state" widget="badge" optional="hide"/>
     </list>
         </field>
     </record>
