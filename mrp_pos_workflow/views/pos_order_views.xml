@@ -9,6 +9,7 @@
 
     <menuitem id="menu_production_line_root"
               name="Línea de Producción"
+              web_icon="mrp_pos_workflow,static/description/icon.webp"
               groups="mrp_pos_workflow.group_production_operator"
               sequence="30"/>
 
