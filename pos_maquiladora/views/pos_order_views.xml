@@ -17,6 +17,9 @@
                     icon="fa-industry"/>
         </header>
         <field name="name" readonly="1"/>
+        <button name="open_order_form" type="object"
+                string="Ver detalle" class="btn-link"
+                icon="fa-external-link"/>
         <field name="delivery_date"/>
         <field name="partner_id" readonly="1"/>
         <field name="amount_total" string="Total" widget="monetary"
